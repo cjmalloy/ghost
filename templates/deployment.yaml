@@ -31,14 +31,14 @@ spec:
             {{- range $key, $value := .Values.config }}
             - name: {{ $key }}
               value: {{ $value | quote }}
-              {{- end }}
+            {{- end }}
             {{- range $key, $value := .Values.configSecrets }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "ghost.fullname" . }}
-                  key: {{ $value }}
-                {{- end }}
+                  name: {{ template "ghost.fullname" $ }}
+                  key: {{ $key }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 2368
