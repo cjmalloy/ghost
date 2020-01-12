@@ -5,8 +5,21 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: ghost
   pullPolicy: IfNotPresent
+
+# Ghost environment variables
+# These are parsed by nconf with "__" separator to form the config
+# Example:
+#config:
+# database__connection__host: 10.0.14.15
+# database__connection__port: 3306
+# database__connection__database: ghost
+# database__connection__user: ghost
+#configSecrets: {}
+# database__connection__password: database-password
+config: {}
+configSecrets: {}
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,9 +43,43 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 6
+  successThreshold: 1
+
+persistence:
+  enabled: false
+  # existingClaim:
+
+  # If defined, storageClassName: <storageClass>
+  # If set to "-", storageClassName: "", which disables dynamic provisioning
+  # If undefined (the default) or set to null, no storageClassName spec is
+  #   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  #   GKE, AWS & OpenStack)
+  #
+  # storageClass: "-"
+
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
 service:
   type: ClusterIP
+  annotations: {}
   port: 80
+  loadBalancerIP:
+  nodePort: # <to set explicitly, choose port between 30000-32767>
+  externalTrafficPolicy: Local
 
 ingress:
   enabled: false
