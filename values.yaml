@@ -11,13 +11,13 @@ image:
 # Ghost environment variables
 # These are parsed by nconf with "__" separator to form the config
 # Example:
-#config:
-# database__connection__host: 10.0.14.15
-# database__connection__port: 3306
-# database__connection__database: ghost
-# database__connection__user: ghost
-#configSecrets: {}
-# database__connection__password: database-password
+# config:
+#  database__connection__host: 10.0.14.15
+#  database__connection__port: 3306
+#  database__connection__database: ghost
+#  database__connection__user: ghost
+# configSecrets:
+#  database__connection__password: database-password
 config: {}
 configSecrets: {}
 
