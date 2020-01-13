@@ -50,6 +50,13 @@ livenessProbe:
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
+  # The GCP Ingress won't accept 301,
+  # so add these so ghost provides a 200 if you are using SSL
+  #headers:
+  #  - name: Host
+  #    value: example.com
+  #  - name: X-Forwarded-Proto
+  #    value: https
 readinessProbe:
   enabled: true
   initialDelaySeconds: 30
@@ -57,6 +64,13 @@ readinessProbe:
   timeoutSeconds: 3
   failureThreshold: 6
   successThreshold: 1
+  # The GCP Ingress won't accept 301,
+  # so add these so ghost provides a 200 if you are using SSL
+  #headers:
+  #  - name: Host
+  #    value: example.com
+  #  - name: X-Forwarded-Proto
+  #    value: https
 
 persistence:
   enabled: false
