@@ -50,7 +50,7 @@ spec:
               port: http
               {{- with .Values.livenessProbe.headers }}
               httpHeaders:
-                {{- toYaml . | nindent 16 }}
+                {{- toYaml . | nindent 14 }}
               {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
@@ -65,7 +65,7 @@ spec:
               port: http
               {{- with .Values.readinessProbe.headers }}
               httpHeaders:
-                {{- toYaml . | nindent 16 }}
+                {{- toYaml . | nindent 14 }}
               {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
