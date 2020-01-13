@@ -93,7 +93,7 @@ service:
   port: 80
   loadBalancerIP:
   nodePort: # <to set explicitly, choose port between 30000-32767>
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster
 
 ingress:
   enabled: false
